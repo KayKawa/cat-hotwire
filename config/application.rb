@@ -1,3 +1,7 @@
+# タイムゾーンをTokyo（日本）にする
+config.time_zone = "Tokyo"
+# デフォルトのロケールを日本にする
+config.i18n.default_locale = :ja
 require_relative "boot"
 
 require "rails"
