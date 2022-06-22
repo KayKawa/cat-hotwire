@@ -1,9 +1,11 @@
 class CatsController < ApplicationController
-  before_action :set_cat, only: %i[ show edit update destroy ]
+  before_action :set_cat, only: %i[show edit update destroy]
 
   # GET /cats
   def index
     @cats = Cat.all
+    # @catsに対してページネートできるようにする
+    @cats = Cat.page(params[:page])
   end
 
   # GET /cats/1
@@ -46,13 +48,14 @@ class CatsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_cat
-      @cat = Cat.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def cat_params
-      params.require(:cat).permit(:name, :age)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_cat
+    @cat = Cat.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def cat_params
+    params.require(:cat).permit(:name, :age)
+  end
 end
